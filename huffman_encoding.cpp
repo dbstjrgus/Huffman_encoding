@@ -5,51 +5,18 @@
 #include <iostream>
 #include <fstream> 
 #include <unordered_map>
+#include "Encoder.h"
 #include <utility> 
 
-class huffman_encoder {
-
-public:
-    std::unordered_map<char, int> map; 
-
-    huffman_encoder() : map()
-    {
-    }
-    
-    void readFile(const std::string& fileName) {
-        std::ifstream file(fileName);
-
-        if (!file) {
-            std::cout << "Unable to read file" << std::endl;
-            return; 
-        }
-
-        char c;
-        while (file.get(c)) {
-            if (map.find(c) == map.end()) {
-                map.insert({ c, 1 }); 
-            }
-            else {
-                map[c]++; 
-            }
-        }
-        file.close(); 
-    }
-
-    void printMap() {
-        for (const auto& pair : this->map) {
-            std::cout << "" << pair.first << " : " << pair.second << std::endl;
-
-        }
-    }
-};
 
 int main()
 {
     std::cout << "Hello World!\n";
-    huffman_encoder hfe; 
+    Huffman_encoder hfe; 
     hfe.readFile("sample3.txt");
     hfe.printMap();
+    hfe.populateNodes(); 
+     
 }
 
 
