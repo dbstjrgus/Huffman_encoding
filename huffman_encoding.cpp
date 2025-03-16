@@ -11,11 +11,12 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    
     Huffman_encoder hfe; 
     hfe.readFile("sample3.txt");
-    hfe.printMap();
+    //hfe.printMap(); 
     hfe.populateNodes(); 
+    return 0; 
      
 }
 

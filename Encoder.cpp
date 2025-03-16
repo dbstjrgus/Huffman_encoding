@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <utility> 
 #include <algorithm>
+#include <set>
 #include "Encoder.h"
 
 
@@ -31,6 +32,11 @@ void Huffman_encoder::readFile(const std::string& fileName) {
 	}
 	file.close(); 
 	nodes = std::vector<std::shared_ptr<Node>>(map.size()); 
+	std::set<std::shared_ptr<Node>> rack(std::begin(nodes), std::end(nodes)); 
+	this->rack = rack; 
+	
+
+
 }
 
 void Huffman_encoder::printMap() {
@@ -67,6 +73,27 @@ void Huffman_encoder::populateNodes() {
 	}
 
 
+
+
 }
+
+void Huffman_encoder::buildTree() {
+	while (rack.size() > 1) {
+		auto it = rack.begin(); 
+		Node& first = **it;
+		Node& second= **(++it); 
+
+
+
+
+
+
+	}
+
+}
+
+
+
+
 
 
