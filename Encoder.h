@@ -10,22 +10,26 @@ public:
 	std::unordered_map<char, int> map;
 	Huffman_encoder(); 
 	struct Node {
-		Node* left;
-		Node* right; 
+		std::shared_ptr<Node> left;
+		std::shared_ptr<Node> right; 
 		char character; 
 		int freq; 
+		bool isleaf; 
 
-		bool operator== (const Node& other) const {
-			return (freq == other.freq); 
+		
+		Node(std::shared_ptr<Node> r, std::shared_ptr<Node> l, char c, int f, bool b) : right(r), left(l), character(c), freq(f), isleaf(b) {}
+	};
+
+	struct NodeComparator {
+		bool operator()(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b) const {
+			if (a->freq == b->freq)
+				return a->isleaf < b->isleaf;
+			return a->freq < b->freq; 
 		}
-		bool operator< (const Node& other) const {
-			return (freq < other.freq); 
-		}
-		Node(Node* r, Node* l, char c, int f) : right(r), left(l), character(c), freq(f) {}
 	};
 	 
 	std::vector<std::shared_ptr<Node>> nodes; 
-	std::set<std::shared_ptr<Node>> rack;
+	std::set<std::shared_ptr<Node>, NodeComparator> rack;
 	
 	void readFile(const std::string& fileName);  
 	void printMap(); 

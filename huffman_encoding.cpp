@@ -13,11 +13,24 @@ int main()
 {
     
     Huffman_encoder hfe; 
+
     hfe.readFile("sample3.txt");
     //hfe.printMap(); 
+    
     hfe.populateNodes(); 
-    return 0; 
-     
+    hfe.buildTree(); 
+    std::cout << hfe.rack.size() << std::endl; 
+    
+
+    if (!hfe.rack.empty() && *hfe.rack.begin()) {
+        std::cout << "good"; 
+    }
+    else {
+        std::cerr << "Error: Final Huffman tree root is null!" << std::endl;
+    }
+    
+    
+    
 }
 
 
