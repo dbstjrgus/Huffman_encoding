@@ -8,6 +8,7 @@
 class Huffman_encoder {
 public:
 	std::unordered_map<char, int> map;
+	std::unordered_map<char, std::string> key; 
 	Huffman_encoder(); 
 	struct Node {
 		std::shared_ptr<Node> left;
@@ -22,8 +23,7 @@ public:
 
 	struct NodeComparator {
 		bool operator()(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b) const {
-			if (a->freq == b->freq)
-				return a->isleaf < b->isleaf;
+			
 			return a->freq < b->freq; 
 		}
 	};
@@ -36,6 +36,9 @@ public:
 	static bool compareNodes(const std::shared_ptr<Node> &n1, const std::shared_ptr<Node> &n2);  
 	void populateNodes(); // makes and sorts array
 	void buildTree();   
+	void buildKey(std::shared_ptr<Node>, std::string code); 
+
+
   
 
 
